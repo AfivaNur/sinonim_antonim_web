@@ -1,0 +1,247 @@
+/* =========================
+   Global Reset & Base
+   ========================= */
+* {
+  box-sizing: border-box;
+  font-family: 'Fredoka', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+body, html {
+  height: 100%;
+  width: 100%;
+  line-height: 1.4;
+  overflow-x: hidden; /* cegah scroll horizontal */
+  overflow-y: auto;   /* pastikan vertical scroll bisa */
+}
+
+.fade-in {
+  animation: fadeIn 0.6s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+/* =========================
+   Page layout
+   ========================= */
+.page {
+  width: 100%;
+}
+
+/* =========================
+   Background Gradients
+   ========================= */
+.splash { background: linear-gradient(160deg, #fff7ae, #ffd84d); }
+.kategori { background: linear-gradient(160deg, #e7d1ff, #d09cff); }
+.quiz { background: linear-gradient(160deg, #ffb8b8, #ff6f6f); }
+body.result { background: linear-gradient(160deg, #e7d1ff, #d09cff); }
+
+/* =========================
+   Container Card Styles
+   ========================= */
+.container, .category-card, .quiz-card, .result-container {
+  width: 100%;
+  max-width: 420px;
+  margin: 10px auto;
+  padding: 20px;
+  border-radius: 25px;
+  background: #fff;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+  text-align: center;
+}
+
+/* =========================
+   Splash / Kategori / Quiz Pages
+   ========================= */
+.center-page {
+  display: flex;
+  justify-content: center;
+  align-items: center; /* center vertikal */
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 20px;
+}
+
+/* =========================
+   Result Page
+   ========================= */
+.result-container { 
+  max-width: 800px;
+  margin: 20px auto;
+  padding: 20px;
+}
+
+/* Result Score Card */
+.result-score-card {
+  background: linear-gradient(135deg, #a56cf5, #b47fff);
+  padding: 20px;
+  border-radius: 20px;
+  color: #fff;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+  margin-bottom: 20px;
+}
+
+.result-score-card h1 { font-size: 2rem; margin-bottom: 8px; }
+.result-score-card h2 { font-size: 3rem; margin: 8px 0; }
+.result-score-card p { font-size: 1rem; }
+
+/* Buttons */
+.result-btn-group {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 15px;
+}
+
+.result-btn {
+  padding: 10px 20px;
+  border-radius: 25px;
+  font-weight: 600;
+  cursor: pointer;
+  border: none;
+  transition: 0.3s;
+  flex: 1 1 auto;
+  max-width: 200px;
+}
+
+.result-btn-yellow { background-color: #ffcc00; color: #333; }
+.result-btn-yellow:hover { background-color: #ffdb4d; }
+.result-btn-purple { background-color: #b47fff; color: #fff; }
+.result-btn-purple:hover { background-color: #a56cf5; }
+
+/* =========================
+   Tables
+   ========================= */
+.result-table-wrapper, .table-wrapper {
+  overflow-x: auto;
+  border-radius: 12px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+  margin-top: 20px;
+}
+
+.result-table, .data-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.result-table th, .result-table td, .data-table th, .data-table td {
+  padding: 10px 12px;
+  text-align: left;
+  border-bottom: 1px solid #eee;
+}
+
+.result-table tr:nth-child(even), .data-table tr:nth-child(even) {
+  background-color: #f8f5ff;
+}
+
+.result-table tr:hover, .data-table tr:hover {
+  background-color: #ede4ff;
+  transition: 0.3s;
+}
+
+.result-correct { color: #28a745; font-weight: 600; }
+.result-wrong { color: #dc3545; font-weight: 600; }
+
+/* =========================
+   Category Cards
+   ========================= */
+.category-list { display: flex; flex-direction: column; gap: 10px; }
+
+.category-card {
+  color: #fff;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.category-card:hover { transform: translateY(-4px); }
+.category-card.purple { background: #a56cf5; }
+.category-card.red { background: #ff6f6f; }
+.category-card.yellow { background: #ffcc00; color: #333; }
+
+/* =========================
+   Quiz Cards
+   ========================= */
+.quiz-card { background: #fff; }
+
+.options { display: flex; flex-direction: column; gap: 10px; margin-top: 15px; }
+
+.option {
+  border: 2px solid #ddd;
+  border-radius: 15px;
+  padding: 10px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.option:hover { background: #f0f0f0; }
+.option.correct { background: #b2f2bb; border-color: #69db7c; }
+.option.wrong { background: #ffa8a8; border-color: #fa5252; }
+
+.quiz-footer { display: flex; justify-content: space-between; margin-top: 10px; }
+
+/* =========================
+   Search Input
+   ========================= */
+.search-input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 12px;
+  border: 2px solid #ddd;
+  font-size: 1rem;
+  outline: none;
+}
+
+.search-input:focus {
+  border-color: #b47fff;
+  box-shadow: 0 0 6px rgba(180,127,255,0.4);
+}
+
+/* =========================
+   Generic Buttons
+   ========================= */
+.btn {
+  display: inline-block;
+  border: none;
+  border-radius: 20px;
+  padding: 12px 28px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  cursor: pointer;
+  margin: 8px 4px;
+  transition: 0.3s;
+}
+
+.btn-yellow { background: #ffcc00; color: #333; }
+.btn-purple { background: #b47fff; color: #fff; }
+.btn:hover { transform: scale(1.05); }
+
+/* =========================
+   Media Queries (Responsif)
+   ========================= */
+@media (max-width: 768px) {
+  .result-score-card h1 { font-size: 1.5rem; }
+  .result-score-card h2 { font-size: 2.5rem; }
+  .result-score-card p { font-size: 0.9rem; }
+
+  .result-btn { padding: 10px 15px; font-size: 0.95rem; }
+
+  .category-card, .quiz-card { max-width: 100%; padding: 15px; }
+
+  .result-table th, .result-table td, .data-table th, .data-table td {
+    padding: 8px;
+    font-size: 0.9rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .result-score-card h1 { font-size: 1.2rem; }
+  .result-score-card h2 { font-size: 2rem; }
+  .result-score-card p { font-size: 0.85rem; }
+
+  .result-btn { font-size: 0.85rem; padding: 8px 12px; }
+
+  .option { font-size: 0.9rem; padding: 8px; }
+}

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pilih Kategori & Level</title>
+  <link rel="stylesheet" href="style.css">
+  <script defer src="script.js"></script>
+</head>
+<body class="fade-in">
+  <header>
+    <div class="lang-switch">
+      <button onclick="switchLanguage('id')">ID</button>
+      <button onclick="switchLanguage('en')">EN</button>
+    </div>
+  </header>
+
+  <section class="pilih-container">
+    <h1 data-id="pilihTitle" data-en="Select Category & Level">Pilih Kategori & Level</h1>
+
+    <div class="category-buttons">
+      <button class="btn" onclick="selectCategory('sinonim')">📘 Sinonim</button>
+      <button class="btn" onclick="selectCategory('antonim')">🟥 Antonim</button>
+    </div>
+
+    <div id="level-section" class="level-buttons hidden">
+      <h2 data-id="chooseLevel" data-en="Choose Level">Pilih Level</h2>
+      <button class="btn" onclick="startQuiz('easy')">🐣 Mudah</button>
+      <button class="btn" onclick="startQuiz('medium')">🐥 Sedang</button>
+      <button class="btn" onclick="startQuiz('hard')">🦅 Sulit</button>
+    </div>
+
+    <div class="footer-buttons">
+      <a href="index.html" class="btn">⬅️ Kembali</a>
+    </div>
+  </section>
+</body>
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modul Antonim</title>
+  <link rel="stylesheet" href="modul.css">
+  <script src="modul.js" defer></script>
+</head>
+<body>
+  <h1>Modul Antonim</h1>
+
+  <!-- Tombol Kembali -->
+  <div style="margin-bottom: 10px;">
+    <button class="btn btn-yellow" onclick="window.location.href='kategori.html'">⬅️ Kembali</button>
+  </div>
+
+  <!-- Kolom pencarian -->
+  <input type="text" id="searchInput" placeholder="Cari kata / jawaban...">
+
+  <!-- Tabel data -->
+  <div class="table-wrapper">
+    <table class="data-table">
+      <thead>
+        <tr><th>No</th><th>Kata</th><th>Jawaban</th></tr>
+      </thead>
+      <tbody id="modulContainer"></tbody>
+    </table>
+  </div>
+
+  <script>
+    const defaultModul = "antonim";
+  </script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Pilih Kategori</title>
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
+</head>
+
+<body class="page kategori fade-in">
+  <main class="container">
+    <!-- Judul Halaman -->
+    <h2 class="greeting">Pilih Kategori Kuis</h2>
+
+    <!-- Pilihan Kategori -->
+    <div class="category-list">
+      <div class="category-card purple" onclick="selectCategory('sinonim')">
+        <h3>Sinonim</h3>
+        <p>Latihan padanan kata</p>
+      </div>
+
+      <div class="category-card red" onclick="selectCategory('antonim')">
+        <h3>Antonim</h3>
+        <p>Latihan lawan kata</p>
+      </div>
+    </div>
+
+    <!-- Catatan: Modul Materi hanya ditampilkan awal, sebelum A–Z -->
+    <div class="modul-materi">
+      <hr style="margin: 30px 0; border: none; border-top: 2px dashed #ccc;" />
+      <h3 style="text-align: center;">📖 Lihat Modul Materi</h3>
+      <div class="category-list">
+        <div class="category-card yellow" onclick="goTo('modul_sinonim.html')">
+          <h3>Modul Sinonim</h3>
+          <p>Lihat seluruh daftar sinonim</p>
+        </div>
+
+        <div class="category-card yellow" onclick="goTo('modul_antonim.html')">
+          <h3>Modul Antonim</h3>
+          <p>Lihat seluruh daftar antonim</p>
+        </div>
+      </div>
+    </div>
+  </main>
+</body>
+</html>

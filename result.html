@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Hasil Kuis</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body class="page result fade-in">
+  <main class="container result-container">
+
+    <!-- Skor -->
+    <div class="result-score-card">
+      <h1>🎉 Skor Kamu</h1>
+      <h2 id="scoreDisplay">0</h2>
+      <p id="message"></p>
+
+      <div class="result-btn-group">
+        <button class="result-btn result-btn-yellow" onclick="goTo('kategori.html')">Main Lagi</button>
+        <button class="result-btn result-btn-purple" onclick="goTo('index.html')">Beranda</button>
+      </div>
+    </div>
+
+    <!-- Tabel Hasil -->
+    <h3 class="result-question-title">Daftar Pertanyaan</h3>
+    <div class="result-table-wrapper">
+      <table class="result-table" id="questionList">
+        <thead>
+          <tr>
+            <th>No</th>
+            <th>Kata</th>
+            <th>Jawaban Anda</th>
+            <th>Jawaban Benar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Data akan diisi JS -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="script.js" defer></script>
+</body>
+</html>
