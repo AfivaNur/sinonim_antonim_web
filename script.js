@@ -153,10 +153,8 @@ function checkAnswer(btn, correct) {
   let answeredQuestions =
     JSON.parse(localStorage.getItem("answeredQuestions") || "[]");
 
-  answeredQuestions[questionIndex] = {
-    kata: currentData[questionIndex].kata,
-    userAnswer: btn.innerText
-  };
+  // simpan jawaban user (string saja)
+  answeredQuestions[questionIndex] = btn.innerText;
 
   localStorage.setItem(
     "answeredQuestions",
