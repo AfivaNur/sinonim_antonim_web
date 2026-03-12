@@ -147,26 +147,14 @@ function loadQuestion() {
 // Cek Jawaban
 // ==========================
 function checkAnswer(btn, correct) {
+  // ... kode lainnya ...
+  let answeredQuestions = JSON.parse(localStorage.getItem("answeredQuestions") || "[]");
+  
+  // Pastikan yang disimpan adalah .innerText (String), bukan elemen tombolnya
+  answeredQuestions[questionIndex] = btn.innerText; 
 
-  document.querySelectorAll(".option").forEach(o => o.disabled = true);
-
-  let answeredQuestions =
-    JSON.parse(localStorage.getItem("answeredQuestions") || "[]");
-
-  // simpan jawaban user (string saja)
-  answeredQuestions[questionIndex] = btn.innerText;
-
-  localStorage.setItem(
-    "answeredQuestions",
-    JSON.stringify(answeredQuestions)
-  );
-
-  if (correct) score++;
-
-  btn.classList.add(correct ? "correct" : "wrong");
-
-  const nextBtn = document.getElementById("next-btn");
-  if (nextBtn) nextBtn.style.display = "inline-block";
+  localStorage.setItem("answeredQuestions", JSON.stringify(answeredQuestions));
+  // ... kode lainnya ...
 }
 
 // ==========================
@@ -266,31 +254,32 @@ window.onload = async function () {
 
       let rows = "";
 
-      quizData.forEach((q, idx) => {
+// Ganti bagian di dalam quizData.forEach dengan ini:
+quizData.forEach((q, idx) => {
+  // Ambil data dari array answeredQuestions
+  let answerData = answeredQuestions[idx];
+  
+  let userAnswer = "-";
 
-        let answerData = answeredQuestions[idx];
-      
-        let userAnswer = "-";
-      
-        if (typeof answerData === "string") {
-          userAnswer = answerData;
-        } 
-        else if (answerData && answerData.userAnswer) {
-          userAnswer = answerData.userAnswer;
-        }
-      
-        const isCorrect =
-          userAnswer.trim().toLowerCase() === q.jawaban.trim().toLowerCase();
-      
-        rows += `
-          <tr>
-            <td>${idx + 1}</td>
-            <td>${q.kata}</td>
-            <td class="${isCorrect ? "result-correct" : "result-wrong"}">${userAnswer}</td>
-            <td class="result-correct">${q.jawaban}</td>
-          </tr>
-        `;
-      });
+  // Validasi apakah data berbentuk object atau string
+  if (typeof answerData === "string") {
+      userAnswer = answerData;
+  } else if (answerData && typeof answerData === "object") {
+      // Jika tidak sengaja tersimpan sebagai object, coba ambil properti teksnya
+      userAnswer = answerData.text || answerData.jawaban || JSON.stringify(answerData);
+  }
+
+  const isCorrect = userAnswer.trim().toLowerCase() === q.jawaban.trim().toLowerCase();
+
+  rows += `
+    <tr>
+      <td>${idx + 1}</td>
+      <td>${q.kata}</td>
+      <td class="${isCorrect ? "result-correct" : "result-wrong"}">${userAnswer}</td>
+      <td class="result-correct">${q.jawaban}</td>
+    </tr>
+  `;
+});
 
       tbody.innerHTML = rows;
     }
