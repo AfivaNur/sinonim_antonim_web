@@ -268,10 +268,19 @@ window.onload = async function () {
 
       quizData.forEach((q, idx) => {
 
-        const userAnswer = (answeredQuestions[idx] || "-").trim();
+        let answerData = answeredQuestions[idx];
+      
+        let userAnswer = "-";
+      
+        if (typeof answerData === "string") {
+          userAnswer = answerData;
+        } 
+        else if (answerData && answerData.userAnswer) {
+          userAnswer = answerData.userAnswer;
+        }
       
         const isCorrect =
-          userAnswer.toLowerCase() === q.jawaban.trim().toLowerCase();
+          userAnswer.trim().toLowerCase() === q.jawaban.trim().toLowerCase();
       
         rows += `
           <tr>
@@ -282,7 +291,7 @@ window.onload = async function () {
           </tr>
         `;
       });
-      
+
       tbody.innerHTML = rows;
     }
   }
