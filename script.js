@@ -267,12 +267,11 @@ window.onload = async function () {
 
       quizData.forEach((q, idx) => {
 
-        const userAnswer =
-          answeredQuestions[idx] || "-";
-
-        const isCorrect =
-          userAnswer === q.jawaban;
-
+        const answerData = answeredQuestions[idx];
+        const userAnswer = answerData ? answerData.userAnswer : "-";
+      
+        const isCorrect = userAnswer === q.jawaban;
+      
         rows += `
           <tr>
             <td>${idx + 1}</td>
