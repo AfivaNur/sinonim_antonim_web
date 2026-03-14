@@ -214,7 +214,14 @@ body.result { background: linear-gradient(160deg, #e7d1ff, #d09cff); }
   transition: 0.3s;
 }
 
-.btn-yellow { background: #ffcc00; color: #333; }
+.btn-yellow {
+  background: #ffcc00;
+  color: #333;
+}
+
+#next-btn{
+  display: none;
+}
 .btn-purple { background: #b47fff; color: #fff; }
 .btn:hover { transform: scale(1.05); }
 
