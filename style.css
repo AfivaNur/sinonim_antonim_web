@@ -225,6 +225,7 @@ body.result { background: linear-gradient(160deg, #e7d1ff, #d09cff); }
 .btn-purple { background: #b47fff; color: #fff; }
 .btn:hover { transform: scale(1.05); }
 
+
 /* =========================
    Media Queries (Responsif)
    ========================= */
