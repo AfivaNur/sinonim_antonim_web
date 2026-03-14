@@ -146,24 +146,44 @@ function loadQuestion() {
 // ==========================
 // Cek Jawaban
 // ==========================
-
 function checkAnswer(btn, correct) {
+
+  // Ambil jawaban yang sudah tersimpan
   let answeredQuestions = JSON.parse(
     localStorage.getItem("answeredQuestions") || "[]"
   );
 
-  // simpan teks jawaban yang dipilih
+  // Simpan teks jawaban user
   answeredQuestions[questionIndex] = btn.innerText;
 
   localStorage.setItem("answeredQuestions", JSON.stringify(answeredQuestions));
 
+  // Tambah skor jika benar
   if (correct) {
-    alert("Jawaban Benar!");
-  } else {
-    alert("Jawaban Salah!");
+    score++;
   }
-}
 
+  // Nonaktifkan semua tombol option setelah menjawab
+  document.querySelectorAll(".option").forEach((button) => {
+    button.disabled = true;
+
+    // beri warna untuk jawaban benar
+    if (button.innerText === currentData[questionIndex].jawaban) {
+      button.style.background = "#4CAF50";
+      button.style.color = "#fff";
+    }
+  });
+
+  // beri warna merah untuk jawaban salah yang dipilih
+  if (!correct) {
+    btn.style.background = "#f44336";
+    btn.style.color = "#fff";
+  }
+
+  // tampilkan tombol next
+  const nextBtn = document.getElementById("next-btn");
+  if (nextBtn) nextBtn.style.display = "block";
+}
 // ==========================
 // Soal Selanjutnya
 // ==========================
