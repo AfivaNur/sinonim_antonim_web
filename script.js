@@ -20,7 +20,10 @@ function goTo(page) {
 function selectCategory(cat) {
   localStorage.setItem("category", cat);
   const container = document.querySelector(".category-list");
-  if (!container) { goTo("quiz.html"); return; }
+  if (!container) {
+    goTo("quiz.html");
+    return;
+  }
 
   let buttons = "";
   for (let i = 65; i <= 90; i++) {
@@ -54,7 +57,6 @@ function selectRange(range) {
 // Tahap 3: Load Soal
 // ==========================
 async function loadQuestions() {
-
   // reset jawaban lama
   localStorage.removeItem("answeredQuestions");
 
@@ -68,7 +70,7 @@ async function loadQuestions() {
   const response = await fetch(`data/${selectedCategory}.json`);
   const data = await response.json();
 
-  currentData = data.filter(item => inRange(item.kata, selectedRange));
+  currentData = data.filter((item) => inRange(item.kata, selectedRange));
 
   if (currentData.length === 0) {
     const questionText = document.getElementById("questionText");
@@ -78,8 +80,7 @@ async function loadQuestions() {
       questionText.innerText = `Belum ada soal untuk huruf ${selectedRange}.`;
 
     if (optionsContainer)
-      optionsContainer.innerHTML =
-        `<button class="btn" onclick="goTo('kategori.html')">⬅️ Kembali</button>`;
+      optionsContainer.innerHTML = `<button class="btn" onclick="goTo('kategori.html')">⬅️ Kembali</button>`;
 
     const nextBtn = document.getElementById("next-btn");
     if (nextBtn) nextBtn.style.display = "none";
@@ -110,7 +111,6 @@ function inRange(kata, range) {
 // Tampilkan Soal
 // ==========================
 function loadQuestion() {
-
   const q = currentData[questionIndex];
 
   const questionNumber = document.getElementById("questionNumber");
@@ -131,7 +131,7 @@ function loadQuestion() {
   const answers = [q.jawaban, ...getRandomAnswers(q.jawaban)];
   shuffleArray(answers);
 
-  answers.forEach(ans => {
+  answers.forEach((ans) => {
     const btn = document.createElement("button");
     btn.className = "option";
     btn.innerText = ans;
@@ -147,39 +147,27 @@ function loadQuestion() {
 // Cek Jawaban
 // ==========================
 function checkAnswer(btn, correct) {
-
-  document.querySelectorAll(".option").forEach(o => o.disabled = true);
-
-  let answeredQuestions =
-    JSON.parse(localStorage.getItem("answeredQuestions") || "[]");
-
-  // simpan jawaban user (string saja)
-  answeredQuestions[questionIndex] = btn.innerText;
-
-  localStorage.setItem(
-    "answeredQuestions",
-    JSON.stringify(answeredQuestions)
+  // ... kode lainnya ...
+  let answeredQuestions = JSON.parse(
+    localStorage.getItem("answeredQuestions") || "[]"
   );
 
-  if (correct) score++;
+  // Pastikan yang disimpan adalah .innerText (String), bukan elemen tombolnya
+  answeredQuestions[questionIndex] = btn.innerText;
 
-  btn.classList.add(correct ? "correct" : "wrong");
-
-  const nextBtn = document.getElementById("next-btn");
-  if (nextBtn) nextBtn.style.display = "inline-block";
+  localStorage.setItem("answeredQuestions", JSON.stringify(answeredQuestions));
+  // ... kode lainnya ...
 }
 
 // ==========================
 // Soal Selanjutnya
 // ==========================
 function nextQuestion() {
-
   questionIndex++;
 
   if (questionIndex < currentData.length) {
     loadQuestion();
   } else {
-
     localStorage.setItem("score", score);
     localStorage.setItem("totalQuestions", currentData.length);
     localStorage.setItem(`done_${selectedCategory}_${selectedRange}`, "true");
@@ -193,7 +181,6 @@ function nextQuestion() {
 // ==========================
 function shuffleArray(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
-
     const j = Math.floor(Math.random() * (i + 1));
 
     [arr[i], arr[j]] = [arr[j], arr[i]];
@@ -201,51 +188,38 @@ function shuffleArray(arr) {
 }
 
 function getRandomAnswers(correct) {
+  const others = currentData
+    .map((item) => item.jawaban)
+    .filter((a) => a !== correct);
 
-  const others =
-    currentData
-      .map(item => item.jawaban)
-      .filter(a => a !== correct);
-
-  return others
-    .sort(() => 0.5 - Math.random())
-    .slice(0, 3);
+  return others.sort(() => 0.5 - Math.random()).slice(0, 3);
 }
 
 // ==========================
 // Saat Halaman Dibuka
 // ==========================
 window.onload = async function () {
-
   if (window.location.pathname.includes("quiz.html")) {
     await loadQuestions();
   }
 
   if (window.location.pathname.includes("result.html")) {
-
-    const correctCount =
-      parseInt(localStorage.getItem("score")) || 0;
+    const correctCount = parseInt(localStorage.getItem("score")) || 0;
 
     const totalQuestions =
       parseInt(localStorage.getItem("totalQuestions")) || 1;
 
-    const cat =
-      localStorage.getItem("category") || "sinonim";
+    const cat = localStorage.getItem("category") || "sinonim";
 
-    const huruf =
-      localStorage.getItem("range") || "A";
+    const huruf = localStorage.getItem("range") || "A";
 
-    const scorePercent =
-      Math.round((correctCount / totalQuestions) * 100);
+    const scorePercent = Math.round((correctCount / totalQuestions) * 100);
 
-    const scoreDisplay =
-      document.getElementById("scoreDisplay");
+    const scoreDisplay = document.getElementById("scoreDisplay");
 
-    const message =
-      document.getElementById("message");
+    const message = document.getElementById("message");
 
-    if (scoreDisplay)
-      scoreDisplay.innerText = `${scorePercent}`;
+    if (scoreDisplay) scoreDisplay.innerText = `${scorePercent}`;
 
     if (message)
       message.innerText =
@@ -253,45 +227,47 @@ window.onload = async function () {
           ? `Keren banget! 🌟 (${cat.toUpperCase()} - ${huruf})`
           : `Ayo coba lagi 💪 (${cat.toUpperCase()} - ${huruf})`;
 
-    const tbody =
-      document.querySelector("#questionList tbody");
+    const tbody = document.querySelector("#questionList tbody");
 
     if (tbody) {
+      const answeredQuestions = JSON.parse(
+        localStorage.getItem("answeredQuestions") || "[]"
+      );
 
-      const answeredQuestions =
-        JSON.parse(localStorage.getItem("answeredQuestions") || "[]");
-
-      const quizData =
-        JSON.parse(localStorage.getItem("quizData") || "[]");
+      const quizData = JSON.parse(localStorage.getItem("quizData") || "[]");
 
       let rows = "";
 
-// Ganti bagian di dalam quizData.forEach dengan ini:
-quizData.forEach((q, idx) => {
-  // Ambil data dari array answeredQuestions
-  let answerData = answeredQuestions[idx];
-  
-  let userAnswer = "-";
+      // Ganti bagian di dalam quizData.forEach dengan ini:
+      quizData.forEach((q, idx) => {
+        // Ambil data dari array answeredQuestions
+        let answerData = answeredQuestions[idx];
 
-  // Validasi apakah data berbentuk object atau string
-  if (typeof answerData === "string") {
-      userAnswer = answerData;
-  } else if (answerData && typeof answerData === "object") {
-      // Jika tidak sengaja tersimpan sebagai object, coba ambil properti teksnya
-      userAnswer = answerData.text || answerData.jawaban || JSON.stringify(answerData);
-  }
+        let userAnswer = "-";
 
-  const isCorrect = userAnswer.trim().toLowerCase() === q.jawaban.trim().toLowerCase();
+        // Validasi apakah data berbentuk object atau string
+        if (typeof answerData === "string") {
+          userAnswer = answerData;
+        } else if (answerData && typeof answerData === "object") {
+          // Jika tidak sengaja tersimpan sebagai object, coba ambil properti teksnya
+          userAnswer =
+            answerData.text || answerData.jawaban || JSON.stringify(answerData);
+        }
 
-  rows += `
+        const isCorrect =
+          userAnswer.trim().toLowerCase() === q.jawaban.trim().toLowerCase();
+
+        rows += `
     <tr>
       <td>${idx + 1}</td>
       <td>${q.kata}</td>
-      <td class="${isCorrect ? "result-correct" : "result-wrong"}">${userAnswer}</td>
+      <td class="${
+        isCorrect ? "result-correct" : "result-wrong"
+      }">${userAnswer}</td>
       <td class="result-correct">${q.jawaban}</td>
     </tr>
   `;
-});
+      });
 
       tbody.innerHTML = rows;
     }
