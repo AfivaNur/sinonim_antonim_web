@@ -146,7 +146,6 @@ function loadQuestion() {
 // ==========================
 // Cek Jawaban
 // ==========================
-let questionIndex = 0;
 
 function checkAnswer(btn, correct) {
   let answeredQuestions = JSON.parse(
