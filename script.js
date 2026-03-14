@@ -146,17 +146,23 @@ function loadQuestion() {
 // ==========================
 // Cek Jawaban
 // ==========================
+let questionIndex = 0;
+
 function checkAnswer(btn, correct) {
-  // ... kode lainnya ...
   let answeredQuestions = JSON.parse(
     localStorage.getItem("answeredQuestions") || "[]"
   );
 
-  // Pastikan yang disimpan adalah .innerText (String), bukan elemen tombolnya
+  // simpan teks jawaban yang dipilih
   answeredQuestions[questionIndex] = btn.innerText;
 
   localStorage.setItem("answeredQuestions", JSON.stringify(answeredQuestions));
-  // ... kode lainnya ...
+
+  if (correct) {
+    alert("Jawaban Benar!");
+  } else {
+    alert("Jawaban Salah!");
+  }
 }
 
 // ==========================
